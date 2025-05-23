@@ -1,6 +1,8 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import {
@@ -11,7 +13,39 @@ import {
 } from "@heroicons/react/24/outline";
 
 export default function DashboardPage() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "loading") return;
+    if (!session) {
+      router.push("/login");
+      return;
+    }
+  }, [session, status, router]);
+
+  if (status === "loading") {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-orange-500"></div>
+      </div>
+    );
+  }
+
+  if (!session) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+            Access Denied
+          </h1>
+          <p className="text-gray-600">
+            Please sign in to access the dashboard.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   const stats = [
     {
@@ -113,7 +147,7 @@ export default function DashboardPage() {
 
   return (
     <motion.div
-      className="space-y-6"
+      className="space-y-6 p-6"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
