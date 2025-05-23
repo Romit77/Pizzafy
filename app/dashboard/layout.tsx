@@ -49,7 +49,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               whileHover={{ scale: 1.05, rotate: 2 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              🍕 Pizafy
+              🍕 Pizzafy
             </motion.h1>
           </motion.div>
 
