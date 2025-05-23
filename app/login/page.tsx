@@ -23,17 +23,11 @@ export default function LoginPage() {
   const handleSignIn = async () => {
     setLoading(true);
     try {
-      const result = await signIn("google", {
+      await signIn("google", {
         callbackUrl: "/dashboard",
-        redirect: false,
       });
-
-      if (result?.ok) {
-        router.push("/dashboard");
-      }
     } catch (error) {
       console.error("Sign in error:", error);
-    } finally {
       setLoading(false);
     }
   };
