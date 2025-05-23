@@ -46,7 +46,6 @@ export default function LoginPage() {
         transition={{ duration: 0.6 }}
         className="glass-card rounded-2xl p-8 w-full max-w-md relative overflow-hidden"
       >
-        {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
             animate={{
@@ -75,7 +74,6 @@ export default function LoginPage() {
         </div>
 
         <div className="relative z-10">
-          {/* Logo and Title */}
           <div className="text-center mb-8">
             <motion.div
               initial={{ scale: 0 }}
@@ -114,7 +112,6 @@ export default function LoginPage() {
             </motion.p>
           </div>
 
-          {/* Sign In Button */}
           <motion.button
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
