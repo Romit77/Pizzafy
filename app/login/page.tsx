@@ -93,7 +93,7 @@ export default function LoginPage() {
               transition={{ delay: 0.3 }}
               className="text-3xl font-bold text-gray-800 mb-2"
             >
-              Pizza Dashboard
+              Pizzafy
             </motion.h1>
 
             <motion.p
