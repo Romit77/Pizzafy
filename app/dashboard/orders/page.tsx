@@ -156,18 +156,18 @@ export default function OrdersPage() {
 
   const getStatusBadge = (status: string) => {
     const baseClasses =
-      "inline-flex px-2 py-1 text-xs font-semibold rounded-full";
+      "inline-flex px-3 py-1 text-xs font-semibold rounded-full";
     switch (status) {
       case "Delivered":
-        return `${baseClasses} bg-green-100 text-green-800`;
+        return `${baseClasses} bg-gradient-to-r from-green-100 to-emerald-100 text-green-800`;
       case "Preparing":
-        return `${baseClasses} bg-yellow-100 text-yellow-800`;
+        return `${baseClasses} bg-gradient-to-r from-yellow-100 to-amber-100 text-yellow-800`;
       case "Out for Delivery":
-        return `${baseClasses} bg-blue-100 text-blue-800`;
+        return `${baseClasses} bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-800`;
       case "Pending":
-        return `${baseClasses} bg-orange-100 text-orange-800`;
+        return `${baseClasses} bg-gradient-to-r from-orange-100 to-red-100 text-orange-800`;
       case "Cancelled":
-        return `${baseClasses} bg-red-100 text-red-800`;
+        return `${baseClasses} bg-gradient-to-r from-red-100 to-pink-100 text-red-800`;
       default:
         return `${baseClasses} bg-gray-100 text-gray-800`;
     }
@@ -192,46 +192,48 @@ export default function OrdersPage() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Pizza Orders</h1>
-          <p className="mt-1 text-sm text-gray-500">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+            Pizza Orders
+          </h1>
+          <p className="mt-1 text-sm text-gray-600">
             Track and manage all pizza orders
           </p>
         </div>
         <div className="mt-4 sm:mt-0">
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-gray-600 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full border border-orange-100">
             Total Orders:{" "}
-            <span className="font-semibold text-gray-900">
+            <span className="font-bold text-orange-600">
               {filteredAndSortedOrders.length}
             </span>
           </span>
         </div>
       </div>
 
-      <div className="bg-white p-4 rounded-lg shadow-sm">
+      <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-indigo-100">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1">
             <div className="relative">
-              <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-indigo-400" />
               <input
                 type="text"
                 placeholder="Search orders..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                className="w-full pl-11 pr-4 py-3 border-2 border-indigo-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white/80 backdrop-blur-sm transition-all duration-200"
               />
             </div>
           </div>
 
           <div className="sm:w-48">
             <div className="relative">
-              <FunnelIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <FunnelIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-purple-400" />
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full pl-10 pr-8 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 appearance-none bg-white"
+                className="w-full pl-11 pr-8 py-3 border-2 border-purple-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 appearance-none bg-white/80 backdrop-blur-sm transition-all duration-200"
               >
                 {statuses.map((status) => (
                   <option key={status} value={status}>
@@ -244,14 +246,14 @@ export default function OrdersPage() {
         </div>
       </div>
 
-      <div className="bg-white shadow-sm rounded-lg overflow-hidden">
+      <div className="bg-white/80 backdrop-blur-sm shadow-lg rounded-xl overflow-hidden border border-gray-200">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+            <thead className="bg-gradient-to-r from-indigo-100 to-purple-100">
               <tr>
                 <th
                   onClick={() => handleSort("id")}
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                  className="px-6 py-4 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider cursor-pointer hover:bg-indigo-200 transition-colors duration-200"
                 >
                   <div className="flex items-center space-x-1">
                     <span>Order ID</span>
@@ -260,7 +262,7 @@ export default function OrdersPage() {
                 </th>
                 <th
                   onClick={() => handleSort("customerName")}
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                  className="px-6 py-4 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider cursor-pointer hover:bg-indigo-200 transition-colors duration-200"
                 >
                   <div className="flex items-center space-x-1">
                     <span>Customer</span>
@@ -269,7 +271,7 @@ export default function OrdersPage() {
                 </th>
                 <th
                   onClick={() => handleSort("pizzaType")}
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                  className="px-6 py-4 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider cursor-pointer hover:bg-indigo-200 transition-colors duration-200"
                 >
                   <div className="flex items-center space-x-1">
                     <span>Pizza Type</span>
@@ -278,7 +280,7 @@ export default function OrdersPage() {
                 </th>
                 <th
                   onClick={() => handleSort("quantity")}
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                  className="px-6 py-4 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider cursor-pointer hover:bg-indigo-200 transition-colors duration-200"
                 >
                   <div className="flex items-center space-x-1">
                     <span>Quantity</span>
@@ -287,7 +289,7 @@ export default function OrdersPage() {
                 </th>
                 <th
                   onClick={() => handleSort("orderDate")}
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                  className="px-6 py-4 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider cursor-pointer hover:bg-indigo-200 transition-colors duration-200"
                 >
                   <div className="flex items-center space-x-1">
                     <span>Order Date</span>
@@ -296,7 +298,7 @@ export default function OrdersPage() {
                 </th>
                 <th
                   onClick={() => handleSort("total")}
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                  className="px-6 py-4 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider cursor-pointer hover:bg-indigo-200 transition-colors duration-200"
                 >
                   <div className="flex items-center space-x-1">
                     <span>Total</span>
@@ -305,7 +307,7 @@ export default function OrdersPage() {
                 </th>
                 <th
                   onClick={() => handleSort("status")}
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                  className="px-6 py-4 text-left text-xs font-semibold text-indigo-600 uppercase tracking-wider cursor-pointer hover:bg-indigo-200 transition-colors duration-200"
                 >
                   <div className="flex items-center space-x-1">
                     <span>Status</span>
@@ -314,25 +316,28 @@ export default function OrdersPage() {
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white/60 backdrop-blur-sm divide-y divide-gray-200">
               {filteredAndSortedOrders.map((order) => (
-                <tr key={order.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                <tr
+                  key={order.id}
+                  className="hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 transition-all duration-200"
+                >
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-indigo-600">
                     {order.id}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">
                     {order.customerName}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-purple-600 font-medium">
                     {order.pizzaType}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">
                     {order.quantity}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
                     {formatDate(order.orderDate)}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-green-600">
                     ${order.total.toFixed(2)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -347,9 +352,9 @@ export default function OrdersPage() {
         </div>
 
         {filteredAndSortedOrders.length === 0 && (
-          <div className="text-center py-12">
-            <div className="text-gray-400 text-lg mb-2">🍕</div>
-            <p className="text-gray-500">
+          <div className="text-center py-12 bg-gradient-to-br from-indigo-50 to-purple-50">
+            <div className="text-6xl mb-4">🍕</div>
+            <p className="text-gray-600 text-lg">
               No orders found matching your criteria.
             </p>
           </div>

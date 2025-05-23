@@ -26,15 +26,15 @@ export default function DashboardPage() {
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-orange-500"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 to-red-50">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-4 border-orange-500 border-t-4 "></div>
       </div>
     );
   }
 
   if (!session) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 to-red-50">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
             Access Denied
@@ -54,6 +54,9 @@ export default function DashboardPage() {
       icon: ShoppingBagIcon,
       change: "+12%",
       changeType: "positive",
+      bgColor: "bg-gradient-to-br from-blue-500 to-indigo-600",
+      iconBg: "bg-blue-100",
+      iconColor: "text-blue-600",
     },
     {
       name: "Revenue",
@@ -61,6 +64,9 @@ export default function DashboardPage() {
       icon: CurrencyDollarIcon,
       change: "+8%",
       changeType: "positive",
+      bgColor: "bg-gradient-to-br from-green-500 to-emerald-600",
+      iconBg: "bg-green-100",
+      iconColor: "text-green-600",
     },
     {
       name: "Customers",
@@ -68,6 +74,9 @@ export default function DashboardPage() {
       icon: UserGroupIcon,
       change: "+4%",
       changeType: "positive",
+      bgColor: "bg-gradient-to-br from-purple-500 to-violet-600",
+      iconBg: "bg-purple-100",
+      iconColor: "text-purple-600",
     },
     {
       name: "Avg Order Value",
@@ -75,6 +84,9 @@ export default function DashboardPage() {
       icon: ChartBarIcon,
       change: "-2%",
       changeType: "negative",
+      bgColor: "bg-gradient-to-br from-orange-500 to-red-600",
+      iconBg: "bg-orange-100",
+      iconColor: "text-orange-600",
     },
   ];
 
@@ -147,13 +159,13 @@ export default function DashboardPage() {
 
   return (
     <motion.div
-      className="space-y-6 p-6"
+      className="space-y-6 p-6 bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 min-h-screen"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
       <motion.div
-        className="bg-white rounded-lg shadow-sm p-6"
+        className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-orange-100 p-6"
         variants={itemVariants}
         whileHover={{ scale: 1.01 }}
         transition={{ type: "spring", stiffness: 300 }}
@@ -167,7 +179,7 @@ export default function DashboardPage() {
           >
             {session?.user?.image ? (
               <motion.div
-                className="relative h-16 w-16 rounded-full ring-4 ring-orange-100 overflow-hidden"
+                className="relative h-16 w-16 rounded-full ring-4 ring-gradient-to-r from-orange-200 to-red-200 overflow-hidden"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
@@ -182,7 +194,7 @@ export default function DashboardPage() {
               </motion.div>
             ) : (
               <motion.div
-                className="h-16 w-16 rounded-full bg-orange-100 flex items-center justify-center"
+                className="h-16 w-16 rounded-full bg-gradient-to-br from-orange-200 to-red-200 flex items-center justify-center ring-4 ring-orange-100"
                 whileHover={{ scale: 1.1, rotate: 10 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
@@ -198,7 +210,7 @@ export default function DashboardPage() {
           </motion.div>
           <div>
             <motion.h1
-              className="text-3xl font-bold text-gray-900"
+              className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent"
               initial={{ x: -50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
@@ -208,9 +220,7 @@ export default function DashboardPage() {
                 className="ml-2"
                 animate={{ rotate: [0, 15, -15, 0] }}
                 transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
-              >
-                🍕
-              </motion.span>
+              ></motion.span>
             </motion.h1>
             <motion.p
               className="text-gray-600 mt-1"
@@ -229,7 +239,7 @@ export default function DashboardPage() {
         {stats.map((stat, index) => (
           <motion.div
             key={stat.name}
-            className="bg-white overflow-hidden shadow-sm rounded-lg cursor-pointer"
+            className="bg-white/80 backdrop-blur-sm overflow-hidden shadow-lg rounded-xl cursor-pointer border border-gray-100"
             variants={statCardVariants}
             whileHover="hover"
             initial="hidden"
@@ -239,11 +249,11 @@ export default function DashboardPage() {
             <div className="p-5">
               <div className="flex items-center">
                 <motion.div
-                  className="flex-shrink-0"
+                  className={`flex-shrink-0 p-3 rounded-xl ${stat.iconBg}`}
                   whileHover={{ scale: 1.2, rotate: 10 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <stat.icon className="h-6 w-6 text-gray-400" />
+                  <stat.icon className={`h-6 w-6 ${stat.iconColor}`} />
                 </motion.div>
                 <div className="ml-5 w-0 flex-1">
                   <dl>
@@ -264,10 +274,10 @@ export default function DashboardPage() {
                         {stat.value}
                       </motion.div>
                       <motion.div
-                        className={`ml-2 text-sm font-medium ${
+                        className={`ml-2 text-sm font-semibold px-2 py-1 rounded-full ${
                           stat.changeType === "positive"
-                            ? "text-green-600"
-                            : "text-red-600"
+                            ? "text-green-700 bg-green-100"
+                            : "text-red-700 bg-red-100"
                         }`}
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -285,74 +295,75 @@ export default function DashboardPage() {
       </div>
 
       <motion.div
-        className="bg-white shadow-sm rounded-lg"
+        className="bg-white/80 backdrop-blur-sm shadow-lg rounded-xl border border-gray-100"
         variants={itemVariants}
         whileHover={{ scale: 1.005 }}
         transition={{ type: "spring", stiffness: 300 }}
       >
         <motion.div
-          className="px-6 py-4 border-b border-gray-200"
+          className="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-orange-50 to-red-50 rounded-t-xl"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
-          <h2 className="text-lg font-medium text-gray-900">Recent Orders</h2>
+          <h2 className="text-lg font-semibold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+            Recent Orders
+          </h2>
         </motion.div>
         <div className="overflow-hidden">
           <table className="min-w-full divide-y divide-gray-200">
             <motion.thead
-              className="bg-gray-50"
+              className="bg-gradient-to-r from-gray-50 to-gray-100"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
             >
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
                   Order ID
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
                   Customer
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
                   Total
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
                   Status
                 </th>
               </tr>
             </motion.thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white/50 divide-y divide-gray-200">
               {recentOrders.map((order, index) => (
                 <motion.tr
                   key={order.id}
-                  className="hover:bg-gray-50"
+                  className="hover:bg-gradient-to-r hover:from-orange-50 hover:to-red-50"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.8 + index * 0.1 }}
                   whileHover={{
                     scale: 1.01,
-                    backgroundColor: "rgb(249, 250, 251)",
                     transition: { duration: 0.2 },
                   }}
                 >
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-600">
                     {order.id}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {order.customer}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-green-600">
                     {order.total}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <motion.span
-                      className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                      className={`inline-flex px-3 py-1 text-xs font-semibold rounded-full ${
                         order.status === "Delivered"
-                          ? "bg-green-100 text-green-800"
+                          ? "bg-gradient-to-r from-green-100 to-emerald-100 text-green-800"
                           : order.status === "Preparing"
-                          ? "bg-yellow-100 text-yellow-800"
+                          ? "bg-gradient-to-r from-yellow-100 to-amber-100 text-yellow-800"
                           : order.status === "Out for Delivery"
-                          ? "bg-blue-100 text-blue-800"
+                          ? "bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-800"
                           : "bg-gray-100 text-gray-800"
                       }`}
                       whileHover={{ scale: 1.05 }}
@@ -367,14 +378,14 @@ export default function DashboardPage() {
           </table>
         </div>
         <motion.div
-          className="px-6 py-3 bg-gray-50"
+          className="px-6 py-3 bg-gradient-to-r from-orange-50 to-red-50 rounded-b-xl"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
         >
           <motion.a
             href="/dashboard/orders"
-            className="text-sm font-medium text-orange-600 hover:text-orange-500"
+            className="text-sm font-semibold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent hover:from-orange-700 hover:to-red-700"
             whileHover={{ x: 5 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
