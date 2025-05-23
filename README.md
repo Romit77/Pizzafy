@@ -1,6 +1,6 @@
 # Pizzafy Dashboard
 
-**Live Demo:** [Your Deployed App URL](http://pizzafy-two.vercel.app/)  
+**Live Demo:** [Deployed App URL](http://pizzafy-two.vercel.app/)  
 **Repository:** [GitHub Repo URL](https://github.com/Romit77/Pizzafy)
 
 ---
