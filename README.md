@@ -17,7 +17,7 @@ Pizzafy is a modern, server-rendered dashboard application built with Next.js. I
 - **Animations:** Framer Motion & `motion`
 - **Icons:** @heroicons/react & lucide-react
 - **Language:** TypeScript / JavaScript
-- **Deployment:** Vercel (or Railway)
+- **Deployment:** Vercel 
 
 ## Features
 
